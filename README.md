@@ -1,5 +1,10 @@
 How to read this repository?
 
+Look at this, to get an idea first
+https://excalidraw.com/#json=8x5J8Yx9cRuLg2DPOgTJc,Hhmjv82zUHwYkw4iH1DFnw
+
+----------------------------------------
+
 
 Project files at different stage:
 - [Express App Baseline] (https://github.com/C237-2024/L07-Demo/tree/f8ae33a2520e225ecb6f7633606c63bd1c66080d)
