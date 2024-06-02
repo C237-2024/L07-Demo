@@ -1,0 +1,33 @@
+<!--
+    Display the following table using EJS:
+    [
+        { id: 1, title: 'Harry Potter', author: 'J.K. Rowling', year: 1997 },
+        { id: 2, title: 'The Da Vinci Code', author: 'Dan Brown', year: 2003 },
+        { id: 3, title: 'The Alchemist', author: 'Paulo Coelho', year: 1988 }
+    ];
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View all books</title>    
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+        </tr>
+        <% books.forEach(function(book) { %>
+            <tr>
+                <td><%= book.id %></td>
+                <td><%= book.title %></td>
+                <td><%= book.author %></td>
+                <td><%= book.year %></td>
+            </tr>
+        <% }); %>
+    </table>
+</html>

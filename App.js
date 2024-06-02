@@ -107,6 +107,139 @@ app.delete('/books/:id', function(req, res) {
 
 
 
+//UI Routes
+//-------------------------------------------------------------------
+
+
+app.get('/', function(req, res) {
+    //res.write('<h1>Hello World</h1>');
+    //res.end();
+
+    res.sendFile(__dirname + '/homepage.html');
+});
+
+
+app.get('/viewAllBooks', function(req, res) {
+
+    //display books in html format
+    let html = '<h1>Books</h1>';
+    html += '<ul>';
+    for (let book of books) {
+        html += `<li> (${book.id}): ${book.title} by ${book.author} (${book.year})</li>`;
+    }
+    html += '</ul>';
+    res.send(html);
+    
+    return;
+
+    //render the allbooks.ejs view
+    res.render('view_books', { books });
+});
+
+
+
+app.get('/viewBook/:id', function(req, res) {
+    const id = req.params.id;
+    
+    //option 1
+    //use find method to search books for book with id
+    let book = books.find(b => b.id == id);
+    
+    //option 2
+    //use for loop to search books for book with id
+    for (let i = 0; i < books.length; i++) {
+         if (books[i].id == id) {
+             book = books[i];
+             break;
+         }
+    }
+
+    //what if book is not found?
+    if (!book) {
+        res.send('Book not found');
+        return;
+    }
+
+    res.render('view_book', { book });
+});
+
+
+app.get('/addBook', function(req, res) {
+    res.render('add_book');
+});
+
+app.post('/addBook', function(req, res) {   
+    const title = req.body.title;
+    const author = req.body.author;
+    const year = req.body.year;
+
+    const id = books[books.length-1].id + 1;
+    const book = { id, title, author, year };
+    books.push(book);
+
+    //redirect to viewAllBooks
+    res.redirect('/viewAllBooks');
+});
+
+
+
+app.get('/editBook/:id', function(req, res) {
+    const id = req.params.id;
+    let book = books.find(b => b.id == id);
+    if (!book) {
+        res.send('Book not found');
+        return;
+    }
+
+    res.render('edit_book', { book });
+});
+
+
+app.post('/editBook/:id', function(req, res) {
+    const id = req.params.id;
+    const title = req.body.title;
+    const author = req.body.author;
+    const year = req.body.year;
+
+    let book = books.find(b => b.id == id);
+    if (!book) {
+        res.send('Book not found');
+        return;
+    }
+
+    book.title = title;
+    book.author = author;
+    book.year = year;
+
+    res.redirect('/viewAllBooks');
+});
+
+
+
+app.get('/deleteBook/:id', function(req, res) {
+    const id = req.params.id;
+    let book = books.find(b => b.id == id);
+    if (!book) {
+        res.send('Book not found');
+        return;
+    }
+
+    res.render('delete_book', { book });
+});
+
+app.post('/deleteBook/:id', function(req, res) {
+    const id = req.params.id;
+    let book = books.find(b => b.id == id);
+    if (!book) {
+        res.send('Book not found');
+        return;
+    }
+
+    books = books.filter(b => b.id != id);
+    res.redirect('/viewAllBooks');
+});
+
+
 //-------------------------------------------------------------------
 
 

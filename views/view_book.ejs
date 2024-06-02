@@ -1,0 +1,27 @@
+<!--
+   Display the following object using EJS:
+        { id: 1, title: 'Harry Potter', author: 'J.K. Rowling', year: 1997 }
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View a book</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+        </tr>
+        <tr>
+            <td><%= book.id %></td>
+            <td><%= book.title %></td>
+            <td><%= book.author %></td>
+            <td><%= book.year %></td>
+        </tr>
+    </table>
+</html>
